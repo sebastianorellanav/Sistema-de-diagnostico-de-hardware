@@ -183,8 +183,11 @@ def mostrarProblemas(result):
     if(numResult!=0):
         titulo = Label(problemas, text="Los Posibles problemas de tu computador son:", font=("Arial Bold", 15))
         titulo.grid(column= 0, row = 0, sticky = W, pady=5)
+        r = 1
         for j in result:
-            myLabel=Label(ventana,text=j['Problema'])
+            p = Label(ventana,text=j['Problema'])
+            p.grid(column=0, row=r, sticky=W)
+            r+=1
     else:
         titulo = Label(problemas, text="No existen problemas asociados a ese conjunto de sintomas", font=("Arial Bold", 15))
         titulo.grid(column= 0, row = 0, sticky = W, pady=5) 
