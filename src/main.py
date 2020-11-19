@@ -68,19 +68,33 @@ if __name__ == "__main__":
     prolog.assertz("sintoma('el antivirus ha desaparecido')")
     prolog.assertz("sintoma('descargas lentas')")
     prolog.assertz("sintoma('corrupción de archivos')")
+    prolog.assertz("sintoma('se congela la imagen y no responde el sistema')")
+    prolog.assertz("sintoma('los videos se reproducen a tirones o se detienen')")
+    prolog.assertz("sintoma('tarda mucho al abrir archivos')")
+    prolog.assertz("sintoma('conecto un pendrive pero lo reconoce')")
+    prolog.assertz("sintoma('no tengo salida de audio')")
+    prolog.assertz("sintoma('mi pc se enciende solo')")
+    prolog.assertz("sintoma('aparecen constantemente anuncios mientras navego por internet')")
+    prolog.assertz("sintoma('no puedo guardar nuevos archivos')")
+    prolog.assertz("sintoma('mis archivos se borran de forma repentina')")
 
-    prolog.assertz("problema('La fuente de alimentacion no esta conectada o esta mala')")
-    prolog.assertz("problema('Falla en la tarjeta grafica')")
-    prolog.assertz("problema('Falla en el Sistema de refrigeracion')")
+
     prolog.assertz("problema('Virus')")
     prolog.assertz("problema('Falla en la RAM')")
+    prolog.assertz("problema('Falla en la placa madre')")
+    prolog.assertz("problema('Falla de drivers')")
+    prolog.assertz("problema('Falla en la tarjeta gráfica')")
+    prolog.assertz("problema('Falla en el Sistema de refrigeración')")
+    prolog.assertz("problema('Falla en la memoria física (disco duro)')")
+    prolog.assertz("problema('La fuente de alimentación no está conectada o presenta alguna falla')")
 
-    prolog.assertz("relacion('La fuente de alimentacion no esta conectada', 'no enciende')")
-    prolog.assertz("relacion('Falla en la tarjeta grafica', 'pantalla negra')")
-    prolog.assertz("relacion('Falla en la tarjeta grafica', 'se escucha un sonido al intentar encenderlo')")
-    prolog.assertz("relacion('Falla en la tarjeta grafica', 'aparecen rayas en el monitor')")
-    prolog.assertz("relacion('Falla en el Sistema de refrigeracion', 'sobrecalentamiento')")
-    prolog.assertz("relacion('Falla en el Sistema de refrigeracion', 'apagado repentino')")
+
+    prolog.assertz("relacion('La fuente de alimentación no está conectada o presenta alguna falla', 'no enciende')")
+    prolog.assertz("relacion('Falla en la tarjeta gráfica', 'pantalla negra')")
+    prolog.assertz("relacion('Falla en la tarjeta gráfica', 'se escucha un sonido al intentar encenderlo')")
+    prolog.assertz("relacion('Falla en la tarjeta gráfica', 'aparecen rayas en el monitor')")
+    prolog.assertz("relacion('Falla en el Sistema de refrigeración'.'sobrecalentamiento')")
+    prolog.assertz("relacion('Falla en el Sistema de refrigeración'.'apagado repentino')")
     prolog.assertz("relacion('Virus', 'lentitud')")
     prolog.assertz("relacion('Virus', 'los programas no funcionan')")
     prolog.assertz("relacion('Virus', 'se reinicia')")
@@ -90,6 +104,16 @@ if __name__ == "__main__":
     prolog.assertz("relacion('Falla en la RAM', 'lentitud')")
     prolog.assertz("relacion('Falla en la RAM', 'se reinicia')")
     prolog.assertz("relacion('Falla en la RAM', 'corrupción de archivos')")
+    prolog.assertz("relacion('Falla en la placa madre', 'pantalla negra')")
+    prolog.assertz("relacion('Falla en la placa madre', 'se congela la imagen y no responde el sistema')")
+    prolog.assertz("relacion('Falla en la tarjeta gráfica', 'los videos se reproducen a tirones o se detienen')")
+    prolog.assertz("relacion('Falla en la memoria física (disco duro)', 'tarda mucho al abrir archivos')")
+    prolog.assertz("relacion('Falla de drivers', 'conecto un pendrive pero lo reconoce')")
+    prolog.assertz("relacion('Falla de drivers', 'no tengo salida de audio')")
+    prolog.assertz("relacion('Virus', 'mi pc se enciende solo')")
+    prolog.assertz("relacion('Virus', 'aparecen constantemente anuncios mientras navego por internet')")
+    prolog.assertz("relacion('Falla en la memoria física (disco duro)', 'no puedo guardar nuevos archivos')")
+    prolog.assertz("relacion('Virus', 'mis archivos se borran de forma repentina')")
 
 
     # Reglas
@@ -159,7 +183,42 @@ if __name__ == "__main__":
     s14=Checkbutton(ventana,text="Hay corrupcion de archivos",command=lambda:CambioEstado(13) )
     s14.deselect()
     s14.pack()
+    
+    s15=Checkbutton(ventana,text="La imagen se congela y sistema no responde",command=lambda:CambioEstado(14) )
+    s15.deselect()
+    s15.pack()
 
+    s16=Checkbutton(ventana,text="Los videos se reproducen a tirones, a saltos o se detienen",command=lambda:CambioEstado(15) )
+    s16.deselect()
+    s16.pack()
+
+    s17=Checkbutton(ventana,text="Los archivos tardan mucho tiempo para abrirse",command=lambda:CambioEstado(16) )
+    s17.deselect()
+    s17.pack()
+
+    s18=Checkbutton(ventana,text="Al conectar un prendive, el computador no lo reconoce",command=lambda:CambioEstado(17) )
+    s18.deselect()
+    s18.pack()
+
+    s19=Checkbutton(ventana,text="Cuando pongo un video o música, no se escucha ningún sonido",command=lambda:CambioEstado(18) )
+    s19.deselect()
+    s19.pack()
+
+    s18=Checkbutton(ventana,text="Luego de apagar mi computador, a veces, se vuelve a encender ",command=lambda:CambioEstado(19) )
+    s18.deselect()
+    s18.pack()
+
+    s20=Checkbutton(ventana,text="Cuando utilizo el browser aparecen constantemente anuncios y publicidad molestosa",command=lambda:CambioEstado(20) )
+    s20.deselect()
+    s20.pack()
+
+    s21=Checkbutton(ventana,text="Intento guardar algún archivo en el computador pero no me deja",command=lambda:CambioEstado(21) )
+    s21.deselect()
+    s21.pack()
+
+    s22=Checkbutton(ventana,text="Mis archivos se borran de manera repentina",command=lambda:CambioEstado(21) )
+    s22.deselect()
+    s22.pack()
 
 
     #Boton para consular
