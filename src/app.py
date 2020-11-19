@@ -11,6 +11,7 @@ from tkinter import *
 from prologData import prolog
 
 ventana = Tk()
+
 # variable universales
 # Lista con todos los sintomas para armar la query
 sintomas=['no enciende','sobrecalentamiento','no entra al SO','pantalla negra','se escucha un sonido al intentar encenderlo', 'aparecen rayas en el monitor','lentitud','los programas no funcionan','apagado repentino','se reinicia','se bloquea', 'el antivirus ha desaparecido','descargas lentas','corrupción de archivos', 'se congela la imagen y no responde el sistema', 'los videos se reproducen a tirones o se detienen', 'tarda mucho al abrir archivos', 'conecto un pendrive pero lo reconoce', 'no tengo salida de audio', 'mi pc se enciende solo', 'aparecen constantemente anuncios mientras navego por internet', 'no puedo guardar nuevos archivos', 'mis archivos se borran de forma repentina']
@@ -32,6 +33,7 @@ def CambioEstado(index):
         estado[index]=0
 # Funcion para mostrar los resultados
 def buscarProblemas():
+
     query="diagnostico(Problema, ["
     i=0
     flag=0
@@ -54,6 +56,8 @@ def iniciarInterfaz():
     #inicio de interfaz
     var = IntVar()
     ventana.geometry("800x460")
+    ventana.title("Consultas")
+    ventana.wm_iconbitmap("1.ico")
 
     #Barra de menu
     menubar = Menu(ventana)
@@ -178,14 +182,17 @@ def iniciarInterfaz():
 
 def mostrarProblemas(result):
     problemas = Tk()
+    problemas.title("Problemas")
+    problemas.wm_iconbitmap("1.ico")
     numResult=len(result)
+
    	
     if(numResult!=0):
         titulo = Label(problemas, text="Los Posibles problemas de tu computador son:", font=("Arial Bold", 15))
         titulo.grid(column= 0, row = 0, sticky = W, pady=5)
         r = 1
         for j in result:
-            p = Label(ventana,text=j['Problema'])
+            p = Label(problemas,text=j['Problema'])
             p.grid(column=0, row=r, sticky=W)
             r+=1
     else:
