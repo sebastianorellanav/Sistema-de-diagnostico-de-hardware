@@ -13,7 +13,7 @@ from prologData import prolog
 ventana = Tk()
 # variable universales
 # Lista con todos los sintomas para armar la query
-sintomas=['no enciende','sobrecalentamiento','no entra al SO','pantalla negra','se escucha un sonido al intentar encenderlo','aparecen rayas en el monitor','lentitud','los programas no funcionan','apagado repentino','se reinicia','se bloquea','el antivirus ha desaparecido','descargas lentas','corrupción de archivos']
+sintomas=['no enciende','sobrecalentamiento','no entra al SO','pantalla negra','se escucha un sonido al intentar encenderlo', 'aparecen rayas en el monitor','lentitud','los programas no funcionan','apagado repentino','se reinicia','se bloquea', 'el antivirus ha desaparecido','descargas lentas','corrupción de archivos', 'se congela la imagen y no responde el sistema', 'los videos se reproducen a tirones o se detienen', 'tarda mucho al abrir archivos', 'conecto un pendrive pero lo reconoce', 'no tengo salida de audio', 'mi pc se enciende solo', 'aparecen constantemente anuncios mientras navego por internet', 'no puedo guardar nuevos archivos', 'mis archivos se borran de forma repentina']
 # Lista que indica si un sintoma fue seleccionado o no
 estado=[]
 
