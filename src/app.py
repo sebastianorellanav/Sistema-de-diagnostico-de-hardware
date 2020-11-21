@@ -49,7 +49,6 @@ def buscarProblemas():
 
     result=prolog.query(query)
     result=list(result)
-    print(result)
     mostrarProblemas(result)
 
 def eliminarProblemasRepetidos(listaProblemas):
@@ -73,7 +72,7 @@ def buscarProbablesProblemas(problemas):
         i += 1
 
     listResult = eliminarProblemasRepetidos(listResult)
-    print(listResult)
+
                 
     titulo = Label(problemas, text="Lo más probable es que su computador presente al menos uno de estos problemas:", font=("Arial Bold", 15))
     titulo.grid(column= 0, row = 0, sticky = W, pady=5)
