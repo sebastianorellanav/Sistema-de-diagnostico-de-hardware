@@ -49,9 +49,45 @@ def buscarProblemas():
 
     result=prolog.query(query)
     result=list(result)
+    print(result)
     mostrarProblemas(result)
 
+def eliminarProblemasRepetidos(listaProblemas):
+    listaFinal = []
+    for problema in listaProblemas:
+        if problema not in listaFinal:
+            listaFinal.append(problema)
 
+    return listaFinal 
+
+def buscarProbablesProblemas(problemas):
+    listResult = []
+    i=0
+    flag=0
+    while i < len(sintomas):
+        if(estado[i] == 1):
+            query = "diagnostico(Problema, [" + "'" + sintomas[i] + "'" + "])"
+            result=prolog.query(query)
+            result=list(result)
+            listResult.append(result)
+        i += 1
+
+    listResult = eliminarProblemasRepetidos(listResult)
+    print(listResult)
+                
+    titulo = Label(problemas, text="Lo más probable es que su computador presente al menos uno de estos problemas:", font=("Arial Bold", 15))
+    titulo.grid(column= 0, row = 0, sticky = W, pady=5)
+    r = 1
+    for j in listResult:
+        for k in j:
+            p = Label(problemas,text="- " + k['Problema'])
+            p.grid(column=0, row=r, sticky=W)
+            r+=1
+        
+
+    
+
+    
 def iniciarInterfaz():
     #inicio de interfaz
     var = IntVar()
@@ -165,7 +201,7 @@ def iniciarInterfaz():
     s20.deselect()
     s20.grid(column=0, row = 12, sticky = W, padx=5)
 
-    s21=Checkbutton(ventana,text="Intento guardar algún archivo en el computador pero no me deja",command=lambda:CambioEstado(21) )
+    s21=Checkbutton(ventana,text="Intento guardar algún archivo en el computador no lo permite",command=lambda:CambioEstado(21) )
     s21.deselect()
     s21.grid(column=1, row = 12, sticky = W)
 
@@ -187,16 +223,18 @@ def mostrarProblemas(result):
     numResult=len(result)
 
    	
-    if(numResult!=0):
-        titulo = Label(problemas, text="Los Posibles problemas de tu computador son:", font=("Arial Bold", 15))
+    if(numResult!=0 or numResult == -1):
+        titulo = Label(problemas, text="Su computador presentea el/los siguiente/s problema/s:", font=("Arial Bold", 15))
         titulo.grid(column= 0, row = 0, sticky = W, pady=5)
         r = 1
         for j in result:
-            p = Label(problemas,text=j['Problema'])
+            p = Label(problemas,text="- " + j['Problema'])
             p.grid(column=0, row=r, sticky=W)
             r+=1
     else:
-        titulo = Label(problemas, text="No existen problemas asociados a ese conjunto de sintomas", font=("Arial Bold", 15))
-        titulo.grid(column= 0, row = 0, sticky = W, pady=5) 
+        buscarProbablesProblemas(problemas)
+        
+
+        
 
 
