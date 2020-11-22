@@ -2,36 +2,51 @@
 #######################   Aplicación LPO para un sistema de   #################################
 #######################   apoyo en diagnóstico de hardware.   #################################
 ###############################################################################################
-#######################   Autores:                            #################################
-#######################   Version: 1                          #################################
-#######################   Fecha:                              #################################
+#######################   Autores: Sebastian Orellana         #################################
+#######################            Gary Simken                #################################
+#######################            Victor Huanqui             #################################
+#######################   Version: 2.1                        #################################
+#######################   Fecha: 22 Noviembre 2020            #################################
 ###############################################################################################
 #
+# Se importan las librerías a utilizar y se conectan los otros archivos del código
 from tkinter import *
 from prologData import prolog
 
-ventana = Tk()
-
 # variable universales
+######################
+# Se crea la ventana principal
+ventana = Tk()
 # Lista con todos los sintomas para armar la query
 sintomas=['no enciende','sobrecalentamiento','no entra al SO','pantalla negra','se escucha un sonido al intentar encenderlo', 'aparecen rayas en el monitor','lentitud','los programas no funcionan','apagado repentino','se reinicia','se bloquea', 'el antivirus ha desaparecido','descargas lentas','corrupción de archivos', 'se congela la imagen y no responde el sistema', 'los videos se reproducen a tirones o se detienen', 'tarda mucho al abrir archivos', 'conecto un pendrive pero lo reconoce', 'no tengo salida de audio', 'mi pc se enciende solo', 'aparecen constantemente anuncios mientras navego por internet', 'no puedo guardar nuevos archivos', 'mis archivos se borran de forma repentina']
 # Lista que indica si un sintoma fue seleccionado o no
 estado=[]
 
+# Funciones
+###########
+
+# Entrada: void
+# Salida: void
+# Descripción: se inicializa un arreglo de 0s
 def inicializarVariables():
     i=0
     while i<len(sintomas):
         estado.append(0)
         i+=1
 
-#####################
-# cambia los estaodos 
+# Entrada: Entero que indica la posicion en la lista de estados
+# Salida: void
+# Descripción: cambia los estados de los botones de la interfaz
 def CambioEstado(index):
     if(estado[index]==0):
         estado[index]=1
     else:
         estado[index]=0
-# Funcion para mostrar los resultados
+
+# Entrada: void
+# Salida: void
+# Descripción: Se construye un String que representa una Query de prolog 
+#              y se realiza la consulta a la base de conocimiento
 def buscarProblemas():
 
     query="diagnostico(Problema, ["
@@ -51,6 +66,9 @@ def buscarProblemas():
     result=list(result)
     mostrarProblemas(result)
 
+# Entrada: Lista de Problemas encontrados
+# Salida: Lista de Problemas filtrada
+# Descripción: Se filtran los problemas repetidos, encontrados en la consulta
 def eliminarProblemasRepetidos(listaProblemas):
     listaFinal = []
     for problema in listaProblemas:
@@ -59,6 +77,10 @@ def eliminarProblemasRepetidos(listaProblemas):
 
     return listaFinal 
 
+# Entrada: Lista de Problemas
+# Salida: Entero que representa que la función termino su ejecución
+# Descripción: En caso de no haber resultado en la primera consulta se buscan los
+#              posibles problemas asociados a los sintomas seleccionados.
 def buscarProbablesProblemas(problemas):
     listResult = []
     i=0
@@ -73,6 +95,10 @@ def buscarProbablesProblemas(problemas):
 
     listResult = eliminarProblemasRepetidos(listResult)
 
+    if len(listResult) == 0:
+        titulo = Label(problemas, text="No existen problemas asociados a ese conjunto de sintomas. Prueba otra vez con otros sintomas.", font=("Arial Bold", 15))
+        titulo.grid(column= 0, row = 0, sticky = W, pady=5)
+        return 0
                 
     titulo = Label(problemas, text="Lo más probable es que su computador presente al menos uno de estos problemas:", font=("Arial Bold", 15))
     titulo.grid(column= 0, row = 0, sticky = W, pady=5)
@@ -82,11 +108,12 @@ def buscarProbablesProblemas(problemas):
             p = Label(problemas,text="- " + k['Problema'])
             p.grid(column=0, row=r, sticky=W)
             r+=1
-        
 
-    
+    return 0   
 
-    
+# Entrada: void
+# Salida: void
+# Descripción: se inicializa la ventana creada como variable global y todos sus componentes
 def iniciarInterfaz():
     #inicio de interfaz
     var = IntVar()
@@ -215,6 +242,9 @@ def iniciarInterfaz():
 
     ventana.mainloop()
 
+# Entrada: Lista de Problemas encontrados
+# Salida: void
+# Descripción: se inicializa la segunda ventana con los problemas encontrados
 def mostrarProblemas(result):
     problemas = Tk()
     problemas.title("Problemas")
